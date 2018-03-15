@@ -1,0 +1,39 @@
+﻿@model RewardsForYou.Models.Rewards
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Points)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Availability)
+        </th>
+        <th></th>
+    </tr>
+
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Points)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Availability)
+        </td>
+
+    </tr>
+
+
+</table>

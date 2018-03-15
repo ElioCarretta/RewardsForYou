@@ -1,0 +1,219 @@
+﻿@model RewardsForYou.Models.Users
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Employee personal page</h2>
+
+
+<!--User details-->
+<h4>Details</h4>
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-2" style="background-color:lightgray; text-align:center; padding:5px; height:160px;">
+            <span class="helper"><img id="userImage" src="~/Images/loading.gif" class="img" /></span>
+        </div>
+
+        <div class="col-lg-2" style="background-color:lightgray; text-align:center; padding:5px; height:160px;">
+            <h4>@Html.DisplayNameFor(model => model.UserPoints)</h4>
+            <h1>@Html.DisplayFor(model => model.UserPoints)</h1>
+
+            <a onclick="OpenRewardsCatalog('@Model.UserID')" class="btn btn-primary">Choose a rewards</a>
+        </div>
+
+        <div class="col-lg-1">
+
+        </div>
+
+        <div class="col-lg-7">
+            <div>
+                <div class="row link-row">
+                    <strong>@Html.DisplayNameFor(model => model.Serial)</strong>
+                    @Html.DisplayFor(modelItem => Model.Serial)
+                </div>
+                <div class="row link-row">
+                    <strong>@Html.DisplayNameFor(model => model.Name)</strong>
+                    @Html.DisplayFor(modelItem => Model.Name)
+                </div>
+                <div class="row link-row">
+                    <strong>@Html.DisplayNameFor(model => model.Surname)</strong>
+                    @Html.DisplayFor(modelItem => Model.Surname)
+                </div>
+                <div class="row link-row">
+                    <strong>@Html.DisplayNameFor(model => model.EMail)</strong>
+                    @Html.DisplayFor(modelItem => Model.EMail)
+                </div>
+                <div class="row link-row">
+                    <strong>@Html.DisplayNameFor(model => model.ManagerUserID)</strong>
+                    @Html.DisplayFor(modelItem => Model.Users2.Name) @Html.DisplayFor(modelItem => Model.Users2.Surname)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+
+<!--User Task details-->
+<h4>Tasks</h4>
+<div class="row link-row">
+    <div class="container-fluid" id="UserTasks" style="margin-top:5px;overflow-x:auto;width:100%;">
+        <table class="table">
+
+            @{
+                RewardsForYou.Models.Missions aMission = new RewardsForYou.Models.Missions();
+                RewardsForYou.Models.Tasks aTask = new RewardsForYou.Models.Tasks();
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => aMission.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aMission.EndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aTask.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aTask.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aTask.Points)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aMission.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aMission.Note)
+                    </th>
+                    <th></th>
+                </tr>
+            }
+
+            @foreach (RewardsForYou.Models.Missions mission in Model.Missions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.Tasks.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.Tasks.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.Tasks.Points)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => mission.Note)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<hr />
+
+<!--User Rewards details-->
+<h4>Rewards</h4>
+<div class="row link-row">
+    <div class="container-fluid" id="UserRewards" style="margin-top:5px;overflow-x:auto;width:100%;">
+        <table class="table">
+
+            @{
+                RewardsForYou.Models.UsersRewards aUsersRewards = new RewardsForYou.Models.UsersRewards();
+                RewardsForYou.Models.Rewards aRewards = new RewardsForYou.Models.Rewards();
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => aUsersRewards.RewardsDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Points)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aUsersRewards.Note)
+                    </th>
+                    <th></th>
+                </tr>
+            }
+
+            @foreach (RewardsForYou.Models.UsersRewards usersRewards in Model.UsersRewards)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => usersRewards.RewardsDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => usersRewards.Rewards.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => usersRewards.Rewards.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => usersRewards.Rewards.Points)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => usersRewards.Note)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $data = {};
+        $data["EMail"] = '@Model.EMail';
+        $.ajax({
+            type: "POST",
+            url: Router.action('Employee', 'GetAADUserImageAsync'),
+            data: $data
+        }).done(function (responseData, textStatus, jqXHR) {
+            if (responseData.Success) {
+                $("#userImage")[0].src = responseData.Base64StringImage;
+            }
+            else {
+                $("#userImage")[0].src = "Images/noUserImage.png"
+            }
+        })
+    });
+
+    function OpenRewardsCatalog(UserID) {
+        $('#loading').modal('show');
+        $data = {};
+        $data["UserID"] = UserID;
+        $.ajax({
+            type: "GET",
+            url: Router.action('Employee', '_ChooseRewards'),
+            data: $data,
+            success: function (data) {
+                $('#showModal .modal-body').html(data);
+                debugger;
+                $('#loading').modal('hide');
+                $('#showModal').modal('show');
+            },
+            error: function () {
+                alert("Error!");
+            }
+        });
+    }
+</script>

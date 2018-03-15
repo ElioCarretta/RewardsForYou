@@ -1,0 +1,18 @@
+﻿@import url("bootstrap.css");
+
+.modal-backdrop.fade {
+    opacity: 0.5 !important;
+}
+
+.fade {
+    opacity: 1 !important;
+}
+
+.modal-dialog {
+    margin-top: 50px;
+}
+
+.hide {
+    opacity: 0 !important;
+    display: none !important;
+}

@@ -1,0 +1,80 @@
+﻿@model RewardsForYou.Models.RewardsForUser
+
+<h4>Rewards</h4>
+<div class="row link-row">
+    <div class="container-fluid" id="Rewards" style="margin-top:5px;overflow-x:auto;width:100%;">
+        <table class="table">
+
+            @{
+                RewardsForYou.Models.Rewards aRewards = new RewardsForYou.Models.Rewards();
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Points)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => aRewards.Availability)
+                    </th>
+                    <th></th>
+                </tr>
+            }
+
+            @foreach (RewardsForYou.Models.Rewards reward in Model.Rewards)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => reward.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reward.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reward.Points)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reward.Availability)
+                    </td>
+                    <td>
+                        <a onclick="TakeRewards( '@reward.RewardsID', '@Model.UserID')"
+                           class="btn btn-primary">Take the rewards</a>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    function TakeRewards(RewardsID, UserID) {
+        var Data = {
+            RewardsID: RewardsID,
+            UserID: UserID
+        };
+
+        $.ajax({
+                type: "POST",
+                url: "@Url.Action("_PartialTakeReward", "Employee")",
+                data: JSON.stringify(Data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    alert(data.messaggio);
+                    if (data.flag == true) {
+                        window.location.reload();
+                    }
+
+                },
+                error: function () {
+                    alert("Error!");
+                }
+
+            });
+    }
+</script>

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="text-center">Rewards For You</h1>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="Employee">
+            <div class="card-body text-center">
+                <h5 class="card-title">Employee</h5>
+                <p class="card-text">Entra nella tua pagina personale</p>
+                <a href="@Url.Action("Index","Employee")" class="btn btn-primary">Vai</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card" id="Manager">
+            <div class="card-body text-center">
+                <h5 class="card-title">Manager</h5>
+                <p class="card-text">Entra nella tua pagina gestionale</p>
+                <a href="@Url.Action("ListaUsers","Manager")" class="btn btn-primary">Vai</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card" id="Amministrator">
+            <div class="card-body text-center">
+                <h5 class="card-title">Amminstrator</h5>
+                <p class="card-text">Entra nella tua pagina di amministrazione</p>
+                <a href="@Url.Action("GoToAmministrator","Home")" class="btn btn-primary">Vai</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        if ("@ViewData["IsRegistred"]" == "True") {
+            if ("@ViewData["Employee"]" == "True") {
+                $('#Employee').css("display", "none");
+            }
+            if ("@ViewData["Manager"]" == "True") {
+                $('#Manager').css("display", "none");
+            }
+            if ("@ViewData["Amministrator"]" == "True") {
+                $('#Amministrator').css("display", "none");
+            }
+        }
+        else {
+            $('#Employee').css("display", "none");
+            $('#Manager').css("display", "none");
+            $('#Amministrator').css("display", "none");
+            alert("Utente non registrato. Contattare l'amministratore.");
+        }
+    });
+</script>*@

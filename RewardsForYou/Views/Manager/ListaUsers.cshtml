@@ -1,0 +1,102 @@
+﻿@model IEnumerable<RewardsForYou.Models.Users>
+
+@{
+    ViewBag.Title = "ListaDipendenti";
+}
+
+<h2>List of Employee</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Serial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManagerUserID)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+       
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManagerUserID)
+            </td>
+
+
+            <td>
+                @*<a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">+</a>
+        <a href="@Url.Action("ListaUsers","Manager")" new { id=item.UserID }) class="btn btn-primary">Details Employee</a>*@
+
+                <a class="btn btn-primary" onclick="ShowMissionModal ('@item.UserID')">Details Employee</a>
+                @*<a class="btn btn-primary" onclick="ShowAddModal ('@item.UserID')">Add Task</a>*@
+                <a class="btn btn-primary" onclick="ShowViewModal ('@item.UserID')">View Task</a>
+                <a class="btn btn-primary" onclick="ShowAssegnaModal ('@item.UserID')">+</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script type="text/javascript">
+    function ShowMissionModal(UserID) {
+
+         window.open(Router.action('Employee', 'Index', { UserID: UserID }));
+        //$('#showModal .modal-body').load(Router.action('Employee', 'Index', { UserID: UserID }));
+        //$('#showModal').modal("show");
+
+
+    }
+
+    //function ShowAddModal(UserID) {
+
+    //    $('#showModal .modal-body').load(Router.action('Manager', 'AddTask', { UserID: UserID}));
+    //    $('#showModal').modal("show");
+
+
+    //}
+
+    function ShowViewModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'ViewTask', { UserID: UserID }));
+        $('#showModal').modal("show");
+
+    }
+
+    function ShowAssegnaModal(UserID) {
+
+        $('#showModal .modal-body').load(Router.action('Manager', 'AssegnaTask', { UserID: UserID }));
+        $('#showModal').modal("show");
+
+    }
+
+
+
+</script>
+
+ @*TaskID: TaskID, Type: Type, Description: Description, ExpiryDate: ExpiryDate, Points: Points, Finished: Finished*@
